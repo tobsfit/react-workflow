@@ -1,0 +1,4 @@
+*  @tobsfit
+*.js  @tobsfit
+*.yml  @tobsfit
+/public/ @tobsfit
