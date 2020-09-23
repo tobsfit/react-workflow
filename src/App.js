@@ -8,7 +8,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Hello GitHub Workflow <span role="img" aria-label="Hello">🙋</span>
+          Hello GitHub Workflow{' '}
+          <span role="img" aria-label="Hello">
+            🙋
+          </span>
         </p>
         <a
           className="App-link"
