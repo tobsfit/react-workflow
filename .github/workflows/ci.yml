@@ -2,6 +2,9 @@ name: CI
 on:
   pull_request:
     branches: [develop]
+  # Push bedeutet unser PR wurde approved
+  push:
+    branches: [develop]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,9 +13,20 @@ jobs:
       - name: Use NodeJS
         uses: actions/setup-node@v1
         with:
-          node_version: "12.x"
+          node_version: '12.x'
       - run: npm ci # installiert unsere Dependencies = npm i
       - run: npm run format:check
       - run: npm test -- --coverage
         env:
           CI: true
+      - name: Build project
+        if: github.event_name == 'push'
+        run: npm run build
+      - name: Deploy to staging
+        if: github.event_name == 'push'
+        run: npx surge --project ./build --domain sweltering-breakfast.surge.sh # npx ermöglicht uns installieren und ausführen von surge in einer Line
+        # wir können surge list ausführen und sehen dann unsere erstellten domains
+        # Für die Authentification fügen wir einige Env vars hinzu
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }} # lokal: `surge token` ausführen
