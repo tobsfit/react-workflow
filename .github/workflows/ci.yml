@@ -24,9 +24,7 @@ jobs:
         run: npm run build
       - name: Deploy to staging
         if: github.event_name == 'push'
-        run: npx surge --project ./build --domain sweltering-breakfast.surge.sh # npx ermöglicht uns installieren und ausführen von surge in einer Line
-        # wir können surge list ausführen und sehen dann unsere erstellten domains
-        # Für die Authentification fügen wir einige Env vars hinzu
+        run: npx surge --project ./build --domain sweltering-breakfast.surge.sh
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }} # lokal: `surge token` ausführen
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
