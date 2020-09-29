@@ -1,7 +1,7 @@
 name: Notify on Issue
 on:
   issues:
-    type: [opened]
+    types: [opened]
 jobs:
   slack-message:
     runs-on: ubuntu-latest
