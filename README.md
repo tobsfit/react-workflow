@@ -1,4 +1,4 @@
-[](https://github.com/tobsfit/react-workflow/workflows/CI/badge.svg?branch=development&event?push)
+[](https://github.com/tobsfit/react-workflow/workflows/CI/badge.svg?branch=develop&event?push)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
