@@ -1,3 +1,5 @@
+[](https://github.com/tobsfit/react-app/workflows/CI/badge.svg?branch=development&event?push)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
