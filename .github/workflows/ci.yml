@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Cache node_modules
@@ -40,14 +43,36 @@ jobs:
         with:
           name: build
           path: build
+      - name: Zip Assets
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          zip -r build.zip ./build
+          zip -r coverage.zip ./coverage
       - name: Create a Release
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # dieser wird automatisch erstellt
-      - name: Deploy to staging
-        if: github.event_name == 'push'
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_TOKEN }} # dieser wird automatisch erstellt
+      - name: Deploy to Staging
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         run: npx surge --project ./build --domain sweltering-breakfast.surge.sh
+      - name: Deploy to Production
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx surge --project ./build --domain pushy-maid.surge.sh
+      - name: Upload Coverage Reports
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx codecov
         env:
-          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Open Issue on failure
+        if: failure() && github.event_name == 'pull_request'
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/issues \
+          --header 'authorization: Bearer ${{ secrets.CUSTOM_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "title": "Automated issue for commit: ${{ github.sha }}",
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
+            "assignees": ["${{ github.event.pull_request.user.login }}"]
+            }'
