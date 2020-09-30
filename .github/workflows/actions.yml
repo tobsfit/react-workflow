@@ -17,6 +17,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: title
+          body: body
           assignees: |
             tobsfit
             maiertobias
