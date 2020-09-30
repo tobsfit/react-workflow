@@ -1,6 +1,7 @@
 // .github/actions/issue/index.js
 const core = require('@actions/core');
-const github = require('@actions/github');
+const { Octokit } = require("@octokit/rest");
+
 
 async function run() {
   try {
@@ -9,7 +10,8 @@ async function run() {
     const body = core.getInput('body');
     const assignees = core.getInput('assignees');
 
-    const octokit = new github.GitHub(token); // Statt octokit könnten wir auch fetch nutzen
+    const octokit = new Octokit({auth: token}); // Statt octokit könnten wir auch fetch nutzen
+    // const octokit = new github.GitHub(token); 
     const response = await octokit.issues.addAssignees({
       ...github.context.repo,
       title,
