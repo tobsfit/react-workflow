@@ -1,7 +1,7 @@
 // .github/actions/issue/index.js
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { Octokit } = require("@octokit/core");
+const { Octokit } = require("@octokit/rest");
 
 async function run() {
   try {
