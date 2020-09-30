@@ -3757,14 +3757,13 @@ async function run() {
     const body = core.getInput('body');
     const assignees = core.getInput('assignees');
 
-    const octokit = new Octokit({auth: token}); // Statt octokit könnten wir auch fetch nutzen
+    const octokit = new Octokit(); // Statt octokit könnten wir auch fetch nutzen
     // const octokit = new github.GitHub(token); 
     const response = await octokit.issues.create({
       ...github.context.repo,
       title,
       body,
-      // braucht ein Array
-      assignees: assignees ? assignees.split('\n'): undefined
+      assignees: assignees ? assignees.split('\n'): undefined // braucht ein Array
     });
 
     core.setOutput('issue', JSON.stringify(response.data)) // Output muss immer ein String sein
