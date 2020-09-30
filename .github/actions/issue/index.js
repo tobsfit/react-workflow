@@ -13,7 +13,7 @@ async function run() {
 
     const octokit = new Octokit({auth: token}); // Statt octokit könnten wir auch fetch nutzen
     // const octokit = new github.GitHub(token); 
-    const response = await octokit.issues.addAssignees({
+    const response = await octokit.issues.create({
       ...github.context.repo,
       title,
       body,
