@@ -11,3 +11,14 @@ jobs:
       - run: |
           echo "Time: ${{ steps.hello.outputs.time }}"
           echo $HELLO
+      # Create Issue with own action
+      - uses: ./.github/actions/issue
+        id: issue
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: title
+          assignees: |
+            tobsfit
+            maiertobias
+      - run: |
+          echo ${{ steps.issue.outputs.issue }}

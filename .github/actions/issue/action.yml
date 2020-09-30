@@ -1,0 +1,22 @@
+name: Open GitHub Issue
+author: Tobsfit
+description: Open a GitHub issue
+inputs:
+  token:
+    description: GitHub Token
+    required: true
+  title:
+    description: Issue Title
+    required: true
+  body:
+    description: Issue Body
+    required: false
+  assignees:
+    description: Issue Assignee
+    required: false
+outputs: # Damit wir es in anderen Steps nutzen können
+  issue: # id des outputs
+    description: The issue object is a json string
+runs:
+  using: 'node12'
+  main: dist/index.js
