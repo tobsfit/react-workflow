@@ -18,8 +18,8 @@ jobs:
           token: ${{ secrets.CUSTOM_TOKEN }}
           title: title
           body: body
-          assignees: |
-            tobsfit
-            maiertobias
+          # assignees: |
+          #   tobsfit
+          #   maiertobias
       - run: |
           echo ${{ steps.issue.outputs.issue }}
