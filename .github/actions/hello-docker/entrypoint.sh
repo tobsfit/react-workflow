@@ -1,4 +1,13 @@
 #!/bin/sh -l
+
+# Implement Error
+if [ true ]
+then
+  echo 'error'
+  exit 1
+fi
+# Error End
+
 echo "::debug ::DEBUG Message"
 echo "::warning ::WARNING Message"
 echo "::error ::ERROR Message"
