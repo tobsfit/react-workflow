@@ -36,26 +36,26 @@ $response = Requests::post(
           0 =>
           array(
             'type' => 'mrkdwn',
-            'text' => '*Repository:*
-            {$_ENV["GITHUB_REPOSITORY"]}',
+            'text' => "*Repository:*
+            {$_ENV['GITHUB_REPOSITORY']}",
           ),
           1 =>
           array(
             'type' => 'mrkdwn',
-            'text' => '*Event:*
-            {$_ENV["GITHUB_EVENT_NAME"]}',
+            'text' => "*Event:*
+            {$_ENV['GITHUB_EVENT_NAME']}",
           ),
           2 =>
           array(
             'type' => 'mrkdwn',
-            'text' => '*Ref:*
-            {$_ENV["GITHUB_REF"]}',
+            'text' => "*Ref:*
+            {$_ENV['GITHUB_REF']}",
           ),
           3 =>
           array(
             'type' => 'mrkdwn',
-            'text' => '*SHA:*
-            {$_ENV["GITHUB_SHA"]}',
+            'text' => "*SHA:*
+            {$_ENV['GITHUB_SHA']}",
           ),
         ),
       ),
