@@ -3,26 +3,26 @@ jobs:
   testing-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/hello-docker
-        id: hello
-        with:
-          who-to-greet: "World"
-      - run: |
-          echo "Time: ${{ steps.hello.outputs.time }}"
-          echo $HELLO
-      # Create Issue with own action
-      - uses: ./.github/actions/issue
-        id: issue
-        with:
-          token: ${{ secrets.CUSTOM_TOKEN }}
-          title: title
-          body: body
-          # assignees: |
-          #   tobsfit
-          #   maiertobias
-      - run: |
-          echo ${{ steps.issue.outputs.issue }}
+      # - uses: actions/checkout@v2
+      # - uses: ./.github/actions/hello-docker
+      #   id: hello
+      #   with:
+      #     who-to-greet: "World"
+      # - run: |
+      #     echo "Time: ${{ steps.hello.outputs.time }}"
+      #     echo $HELLO
+      # # Create Issue with own action
+      # - uses: ./.github/actions/issue
+      #   id: issue
+      #   with:
+      #     token: ${{ secrets.CUSTOM_TOKEN }}
+      #     title: title
+      #     body: body
+      #     # assignees: |
+      #     #   tobsfit
+      #     #   maiertobias
+      # - run: |
+      #     echo ${{ steps.issue.outputs.issue }}
       - name: Send a Slack Message
         uses: ./.github/actions/slack
         with:
